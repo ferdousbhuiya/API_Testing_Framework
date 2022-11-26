@@ -4,11 +4,10 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.testng.annotations.Test;
 
-public class TrelloTest extends BaseTest{
+public class TrelloTest extends BaseTest {
 
     @Test
-    public void verifyToCreateBoard()
-    {
+    public void verifyToCreateBoard() {
         extentReport.createTestCase("Verify to Create A Board");
 
         String key = configProperties.getProperty("APIkey");
@@ -22,8 +21,7 @@ public class TrelloTest extends BaseTest{
     }
 
     @Test
-    public void verifytoCreateList()
-    {
+    public void verifytoCreateList() {
 
         extentReport.createTestCase("Verify Create list");
 
@@ -40,14 +38,13 @@ public class TrelloTest extends BaseTest{
 
         RestAssured.given().log().all().contentType(ContentType.JSON).queryParam("key", key)
                 .queryParam("token", token)
-                .queryParam("name", "List by automation 26 Nov.").queryParam("idBoard",ProductId)
+                .queryParam("name", "List by automation 26 Nov.").queryParam("idBoard", ProductId)
                 .when().post("/1/lists")
                 .then().log().all().assertThat().statusCode(200);
     }
 
     @Test
-    public void verifytoCreateCard()
-    {
+    public void verifytoCreateCard() {
         extentReport.createTestCase("Verify Create A Card");
 
         String key = configProperties.getProperty("APIkey");
@@ -64,20 +61,20 @@ public class TrelloTest extends BaseTest{
         //Create a List and take the id#
         String ListID = RestAssured.given().log().all().contentType(ContentType.JSON).queryParam("key", key)
                 .queryParam("token", token)
-                .queryParam("name", "List by automation 26 Nov. Serial 1").queryParam("idBoard",BoardId)
+                .queryParam("name", "List by automation 26 Nov. Serial 1").queryParam("idBoard", BoardId)
                 .when().post("/1/lists")
                 .then().log().all().extract().path("id");
 
         // Create a card and verify
         RestAssured.given().log().all().contentType(ContentType.JSON).queryParam("key", key)
                 .queryParam("token", token)
-                .queryParam("name", "Card by automation 26 Nov. Serial 1").queryParam("idList",ListID)
+                .queryParam("name", "Card by automation 26 Nov. Serial 1").queryParam("idList", ListID)
                 .when().post("/1/cards")
                 .then().log().all().assertThat().statusCode(200);
     }
+
     @Test
-    public void verifytoDelteACard()
-    {
+    public void verifytoDelteACard() {
         extentReport.createTestCase("Verify to Delte A Card");
 
         String key = configProperties.getProperty("APIkey");
@@ -94,14 +91,14 @@ public class TrelloTest extends BaseTest{
         //Create a List and take the id#
         String ListID = RestAssured.given().log().all().contentType(ContentType.JSON).queryParam("key", key)
                 .queryParam("token", token)
-                .queryParam("name", "List by automation 26 Nov. Serial 2").queryParam("idBoard",BoardId)
+                .queryParam("name", "List by automation 26 Nov. Serial 2").queryParam("idBoard", BoardId)
                 .when().post("/1/lists")
                 .then().extract().path("id");
 
         // Create a card and take the id#
         String CardId = RestAssured.given().log().all().contentType(ContentType.JSON).queryParam("key", key)
                 .queryParam("token", token)
-                .queryParam("name", "Card by automation 26 Nov. Serial 2").queryParam("idList",ListID)
+                .queryParam("name", "Card by automation 26 Nov. Serial 2").queryParam("idList", ListID)
                 .when().post("/1/cards")
                 .then().extract().path("id");
 
@@ -115,8 +112,7 @@ public class TrelloTest extends BaseTest{
     }
 
     @Test
-    public void verifytoUpdateACard()
-    {
+    public void verifytoUpdateACard() {
         extentReport.createTestCase("Verify to Update A Card");
 
         String key = configProperties.getProperty("APIkey");
@@ -133,14 +129,14 @@ public class TrelloTest extends BaseTest{
         //Create a List and take the id#
         String ListID = RestAssured.given().log().all().contentType(ContentType.JSON).queryParam("key", key)
                 .queryParam("token", token)
-                .queryParam("name", "List by automation 26 Nov. Serial 2").queryParam("idBoard",BoardId)
+                .queryParam("name", "List by automation 26 Nov. Serial 2").queryParam("idBoard", BoardId)
                 .when().post("/1/lists")
                 .then().extract().path("id");
 
         // Create a card and take the id#
         String CardId = RestAssured.given().log().all().contentType(ContentType.JSON).queryParam("key", key)
                 .queryParam("token", token)
-                .queryParam("name", "Card by automation 26 Nov. Serial 2").queryParam("idList",ListID)
+                .queryParam("name", "Card by automation 26 Nov. Serial 2").queryParam("idList", ListID)
                 .when().post("/1/cards")
                 .then().extract().path("id");
 
@@ -154,8 +150,7 @@ public class TrelloTest extends BaseTest{
     }
 
     @Test
-    public void verifytoDelteACardCofirmation()
-    {
+    public void verifytoDelteACardCofirmation() {
         extentReport.createTestCase("Verify to Delte A Card");
 
         String key = configProperties.getProperty("APIkey");
@@ -172,14 +167,14 @@ public class TrelloTest extends BaseTest{
         //Create a List and take the id#
         String ListID = RestAssured.given().log().all().contentType(ContentType.JSON).queryParam("key", key)
                 .queryParam("token", token)
-                .queryParam("name", "List by automation 26 Nov. Serial 2").queryParam("idBoard",BoardId)
+                .queryParam("name", "List by automation 26 Nov. Serial 2").queryParam("idBoard", BoardId)
                 .when().post("/1/lists")
                 .then().extract().path("id");
 
         // Create a card and take the id#
         String CardId = RestAssured.given().log().all().contentType(ContentType.JSON).queryParam("key", key)
                 .queryParam("token", token)
-                .queryParam("name", "Card by automation 26 Nov. Serial 2").queryParam("idList",ListID)
+                .queryParam("name", "Card by automation 26 Nov. Serial 2").queryParam("idList", ListID)
                 .when().post("/1/cards")
                 .then().extract().path("id");
 
@@ -199,9 +194,9 @@ public class TrelloTest extends BaseTest{
                 .then().assertThat().statusCode(404);
 
     }
+
     @Test
-    public void verifytoGetABoard()
-    {
+    public void verifytoGetABoard() {
 
         extentReport.createTestCase("Verify Create list");
 
@@ -223,8 +218,6 @@ public class TrelloTest extends BaseTest{
                 .when().get("/1/boards/{id}")
                 .then().assertThat().statusCode(200);
     }
-
-
 
 
 }
